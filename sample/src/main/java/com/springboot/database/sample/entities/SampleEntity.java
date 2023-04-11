@@ -1,7 +1,5 @@
 package com.springboot.database.sample.entities;
 
-
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,16 +9,20 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "sample_table")
-public class Sample {
+public class SampleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
+
     @Column(name = "sample_name", nullable = false)
     private String name;
 
-    public Sample() {
+    public SampleEntity() {
+    }
+
+    public SampleEntity(String name) {
+        this.name = name;
     }
 
     public Integer getId() {
