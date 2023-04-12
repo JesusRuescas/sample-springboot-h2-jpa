@@ -9,13 +9,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.springboot.database.sample.entities.CourseEntity;
-import com.springboot.database.sample.repository.SampleRepository;
+import com.springboot.database.sample.repository.CourseRepository;
 
 @SpringBootApplication
 public class SampleApplication implements CommandLineRunner {
 
 	@Autowired
-	private SampleRepository courseRepository;
+	private CourseRepository courseRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SampleApplication.class, args);

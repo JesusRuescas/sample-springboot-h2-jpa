@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.springboot.database.sample.entities.CourseEntity;
 
-public interface SampleRepository extends JpaRepository<CourseEntity, Integer> {
+public interface CourseRepository extends JpaRepository<CourseEntity, Integer> {
     List<CourseEntity> findByName(String name);
 
     List<CourseEntity> findByNameContaining(String name);
