@@ -17,14 +17,14 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity
-@Table(name = "sample_table")
-public class SampleEntity {
+@Table(name = "course_table")
+public class CourseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "sample_name", nullable = false)
+    @Column(name = "course_name", nullable = false)
     private String name;
 
     @Column(nullable = false)
@@ -53,10 +53,10 @@ public class SampleEntity {
         this.username = "Admin";
     }
 
-    public SampleEntity() {
+    public CourseEntity() {
     }
 
-    public SampleEntity(String name, String area) {
+    public CourseEntity(String name, String area) {
         this.name = name;
         this.area = area;
     }

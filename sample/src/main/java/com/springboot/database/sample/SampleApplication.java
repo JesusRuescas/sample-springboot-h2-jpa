@@ -8,14 +8,14 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.springboot.database.sample.entities.SampleEntity;
+import com.springboot.database.sample.entities.CourseEntity;
 import com.springboot.database.sample.repository.SampleRepository;
 
 @SpringBootApplication
 public class SampleApplication implements CommandLineRunner {
 
 	@Autowired
-	private SampleRepository sampleRepository;
+	private SampleRepository courseRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SampleApplication.class, args);
@@ -23,51 +23,49 @@ public class SampleApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		SampleEntity sample1 = new SampleEntity("Sample session 1", "Compile");
-		SampleEntity sample2 = new SampleEntity("Sample session 2", "Compile");
-		SampleEntity sample3 = new SampleEntity("Sample session 3", "Compile");
-		SampleEntity sample4 = new SampleEntity("Sample session Test 1", "Test");
-		SampleEntity sample5 = new SampleEntity("Sample session test 2", "Test");
-		sampleRepository.save(sample1);
-		sampleRepository.save(sample2);
-		sampleRepository.save(sample3);
-		sampleRepository.save(sample4);
-		sampleRepository.save(sample5);
+		CourseEntity course1 = new CourseEntity("Bachelor of Information Systems", "Development");
+		CourseEntity course2 = new CourseEntity("Technologist in systems analysis and development", "Development");
+		CourseEntity course3 = new CourseEntity("Technical course in computer networks", "Infrastructure");
+		CourseEntity course4 = new CourseEntity("Bachelor in Computer Engineering", "Data Science");
+		courseRepository.save(course1);
+		courseRepository.save(course2);
+		courseRepository.save(course3);
+		courseRepository.save(course4);
 		Thread.sleep(3000);
-		sample2.setName("Sample session update");
-		sampleRepository.save(sample2);
+		course2.setName("Sample session update");
+		courseRepository.save(course2);
 
-		List<SampleEntity> sampleList = sampleRepository.findAll();
-		sampleList.forEach(sample -> System.out.println(sample));
-		System.out.println("The DB have " + sampleRepository.count() + " fields");
+		List<CourseEntity> courseList = courseRepository.findAll();
+		courseList.forEach(course -> System.out.println(course));
+		System.out.println("The DB have " + courseRepository.count() + " fields");
 
-		Optional<SampleEntity> sampleSearch = sampleRepository.findById(3);
-		SampleEntity sampleFinal = sampleSearch.orElse(null);
+		Optional<CourseEntity> courseSearch = courseRepository.findById(3);
+		CourseEntity courseFinal = courseSearch.orElse(null);
 
-		System.out.println("The name of the searched field is '" + sampleFinal.getName() + "'");
+		System.out.println("The name of the searched field is '" + courseFinal.getName() + "'");
 
-		List<SampleEntity> sampleFindByName = sampleRepository.findByName("Sample session 1");
-		sampleFindByName.forEach(SampleEntity -> System.out.println(SampleEntity));
+		List<CourseEntity> courseFindByName = courseRepository.findByName("Bachelor of Information Systems");
+		courseFindByName.forEach(SampleEntity -> System.out.println(SampleEntity));
 
-		List<SampleEntity> sampleFindByNameContaining = sampleRepository.findByNameContaining("session");
-		sampleFindByNameContaining.forEach(SampleEntity -> System.out.println(SampleEntity));
+		List<CourseEntity> courseFindByNameContaining = courseRepository.findByNameContaining("networks");
+		courseFindByNameContaining.forEach(SampleEntity -> System.out.println(SampleEntity));
 
-		List<SampleEntity> sampleFindByNameLike = sampleRepository.findByNameLike("%3%");
-		sampleFindByNameLike.forEach(SampleEntity -> System.out.println(SampleEntity));
+		List<CourseEntity> courseFindByNameLike = courseRepository.findByNameLike("%Systems%");
+		courseFindByNameLike.forEach(SampleEntity -> System.out.println(SampleEntity));
 
-		List<SampleEntity> sampleFindByNameLikeIgnoreCase = sampleRepository.findByNameLikeIgnoreCase("%Test%");
-		sampleFindByNameLikeIgnoreCase.forEach(SampleEntity -> System.out.println(SampleEntity));
+		List<CourseEntity> courseFindByNameLikeIgnoreCase = courseRepository.findByNameLikeIgnoreCase("%systems%");
+		courseFindByNameLikeIgnoreCase.forEach(SampleEntity -> System.out.println(SampleEntity));
 
-		List<SampleEntity> findByQueryName = sampleRepository.findByQueryName();
+		List<CourseEntity> findByQueryName = courseRepository.findByQueryName();
 		findByQueryName.forEach(SampleEntity -> System.out.println(SampleEntity));
 
-		List<String> findByQueryNamePeerArea = sampleRepository.findByQueryNamePeerArea();
+		List<String> findByQueryNamePeerArea = courseRepository.findByQueryNamePeerArea();
 		findByQueryNamePeerArea.forEach(SampleEntity -> System.out.println(SampleEntity));
 
-		List<String> findByQueryNamePeerSelectedArea = sampleRepository.findByQueryNamePeerSelectedArea("Compile");
+		List<String> findByQueryNamePeerSelectedArea = courseRepository.findByQueryNamePeerSelectedArea("Development");
 		findByQueryNamePeerSelectedArea.forEach(SampleEntity -> System.out.println(SampleEntity));
 
-		List<String> findByQueryNamePeerAreaParam = sampleRepository.findByQueryNamePeerAreaParam("Compile",
+		List<String> findByQueryNamePeerAreaParam = courseRepository.findByQueryNamePeerAreaParam("Development",
 				"Sample session");
 		findByQueryNamePeerAreaParam.forEach(SampleEntity -> System.out.println(SampleEntity));
 	}
