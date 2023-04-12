@@ -2,6 +2,8 @@ package com.springboot.database.sample.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,6 +13,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PostPersist;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
@@ -42,6 +45,9 @@ public class CourseEntity {
 
     @Transient
     private BigDecimal value;
+
+    @OneToMany
+    private List<StudentEntity> students = new ArrayList<>();
 
     @PostPersist
     private void postPersistData() {
@@ -115,6 +121,14 @@ public class CourseEntity {
 
     public void setValue(BigDecimal value) {
         this.value = value;
+    }
+
+    public List<StudentEntity> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<StudentEntity> students) {
+        this.students = students;
     }
 
     @Override

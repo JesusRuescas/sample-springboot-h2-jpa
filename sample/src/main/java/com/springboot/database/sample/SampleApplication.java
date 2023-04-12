@@ -1,21 +1,38 @@
 package com.springboot.database.sample;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.springboot.database.sample.entities.ClassEntity;
 import com.springboot.database.sample.entities.CourseEntity;
+import com.springboot.database.sample.entities.StudentEntity;
+import com.springboot.database.sample.entities.StudyGridEntity;
+import com.springboot.database.sample.repository.ClassRepository;
 import com.springboot.database.sample.repository.CourseRepository;
+import com.springboot.database.sample.repository.StudentRepository;
+import com.springboot.database.sample.repository.StudyGridRepository;
 
 @SpringBootApplication
 public class SampleApplication implements CommandLineRunner {
 
 	@Autowired
 	private CourseRepository courseRepository;
+
+	@Autowired
+	private StudentRepository studentRepository;
+
+	@Autowired
+	private StudyGridRepository studyGridRepository;
+
+	@Autowired
+	private ClassRepository classRepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SampleApplication.class, args);
@@ -32,7 +49,7 @@ public class SampleApplication implements CommandLineRunner {
 		courseRepository.save(course3);
 		courseRepository.save(course4);
 		Thread.sleep(3000);
-		course2.setName("Sample session update");
+		course2.setName("UPDATE - Bachelor of Information Systems");
 		courseRepository.save(course2);
 
 		List<CourseEntity> courseList = courseRepository.findAll();
@@ -68,6 +85,25 @@ public class SampleApplication implements CommandLineRunner {
 		List<String> findByQueryNamePeerAreaParam = courseRepository.findByQueryNamePeerAreaParam("Development",
 				"Sample session");
 		findByQueryNamePeerAreaParam.forEach(SampleEntity -> System.out.println(SampleEntity));
+
+		StudentEntity student1 = new StudentEntity("Jesus", course1);
+		StudentEntity student2 = new StudentEntity("Junior", course1);
+		StudentEntity student3 = new StudentEntity("Junior", course3);
+		studentRepository.save(student1);
+		studentRepository.save(student2);
+		studentRepository.save(student3);
+
+		StudyGridEntity studyGrid1 = new StudyGridEntity("Bachelor of Information Systems", student1);
+		StudyGridEntity studyGrid2 = new StudyGridEntity("Technical course in computer networks", student3);
+		studyGridRepository.save(studyGrid1);
+		studyGridRepository.save(studyGrid2);
+
+		Set<StudyGridEntity> classGrid = new HashSet<>();
+		classGrid.add(studyGrid1);
+		ClassEntity className1 = new ClassEntity("T.I", classGrid);
+		ClassEntity className2 = new ClassEntity("Data Science", classGrid);
+		classRepository.save(className1);
+		classRepository.save(className2);
 	}
 
 }
