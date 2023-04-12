@@ -7,7 +7,7 @@ I would like to point out that I already have knowledge on the subject, but I de
 
 ### Notes
 
-Starting with Springboot version 2.5.0, the way it initializes the DataSource with SQL scripts has changed, so you need to set the following property in <strong><a href="https://github.com/JesusRuescas/sample-springboot-h2-jpa/blob/main/sample/src/main/resources/application.properties">Resources</a></strong>: ```spring.jpa.defer-datasource-initialization=true```
-Click <strong><a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.5-Release-Notes#hibernate-and-datasql">here</a></strong> for more details
+Starting with Springboot version 2.5.0, <strong><a href="https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-2.5-Release-Notes#hibernate-and-datasql">the way it initializes the DataSource with SQL scripts has changed</a></strong>, so you need to set the following property in <strong><a href="https://github.com/JesusRuescas/sample-springboot-h2-jpa/blob/main/sample/src/main/resources/application.properties">Resources</a></strong>: ```spring.jpa.defer-datasource-initialization=true```
 
 The new versions of the h2 database dependency may present problems with the connection, for this it is necessary to point out which is the JDBC URL, for this I put the following property in <strong><a href="https://github.com/JesusRuescas/sample-springboot-h2-jpa/blob/main/sample/src/main/resources/application.properties">Resources</a></strong>: ```spring.datasource.url=```
+
