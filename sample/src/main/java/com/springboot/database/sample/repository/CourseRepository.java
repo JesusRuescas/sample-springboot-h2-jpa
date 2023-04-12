@@ -20,7 +20,7 @@ public interface CourseRepository extends JpaRepository<CourseEntity, Integer> {
     @Query(value = "Select c From CourseEntity c")
     List<CourseEntity> findByQueryName();
 
-    @Query(value = "Select course_name From course_table where area = 'Test'", nativeQuery = true)
+    @Query(value = "Select course_name From course_table where area = 'Development'", nativeQuery = true)
     List<String> findByQueryNamePeerArea();
 
     @Query(value = "Select course_name From course_table where area = :area", nativeQuery = true)
